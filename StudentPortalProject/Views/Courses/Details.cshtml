@@ -1,0 +1,49 @@
+﻿@model StudentPortalProject.Models.Course
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+@await Html.PartialAsync("_CourseNavbar")
+
+<div class="page-title-with-button m-4">
+	<h2>Announcements</h2>
+
+	@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+	{
+		<button>
+	<a asp-controller="Announcements" asp-action="Create" asp-route-id="@Model.Id">Create Announcement</a>
+	</button>
+	}
+</div>
+
+<div class="card-deck">
+	@foreach (var announcement in Model.Announcements)
+	{
+		<div class="large-card card">
+			<div class="large-card-heading card-heading">
+				<h5 class="card-title">@announcement.Title</h5>
+
+				@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+				{
+					<div class="card-icon">
+						<a class="" href="@Url.Action("Edit", "Announcements", new { id = announcement.Id })">
+							<i class="bi bi-pencil color-white"></i>
+						</a>
+						<a class="" href="@Url.Action("Delete", "Announcements", new { id = announcement.Id })">
+							<i class="bi bi-trash color-white"></i>
+						</a>
+					</div>
+				}
+			</div>
+			<div class="card-body">
+				<p class="card-text">@announcement.Message</p>
+			</div>
+			<div class="card-footer">
+				
+				<small class="text-muted">@announcement.Date.ToString("g")</small>
+
+			</div>
+		</div>
+	}
+</div>
