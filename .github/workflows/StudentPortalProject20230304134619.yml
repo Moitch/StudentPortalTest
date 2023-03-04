@@ -4,7 +4,7 @@ on: [push]
 
 env:
   AZURE_WEBAPP_NAME: StudentPortalProject20230304134619
-  AZURE_WEBAPP_PACKAGE_PATH: StudentPortalProject\published
+  AZURE_WEBAPP_PACKAGE_PATH: StudentPortalProject
   NUGET_VERSION: '6.0.x'
 
 jobs:
